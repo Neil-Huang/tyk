@@ -1318,6 +1318,9 @@ func listen(l net.Listener, err error) {
 			getPolicies()
 		}
 
+		defaultRouter.SkipClean(true)
+		mainRouter.SkipClean(true)
+
 		// Use a custom server so we can control keepalives
 		if config.HttpServerOptions.OverrideDefaults {
 			log.WithFields(logrus.Fields{
