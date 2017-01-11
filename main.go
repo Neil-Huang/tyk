@@ -1300,6 +1300,9 @@ func listen(l net.Listener, err error) {
 		WriteTimeout = config.HttpServerOptions.WriteTimeout
 	}
 
+	defaultRouter.SkipClean(true)
+	mainRouter.SkipClean(true)
+
 	// Handle reload when SIGUSR2 is received
 	if nil != err {
 		// Listen on a TCP or a UNIX domain socket (TCP here).
@@ -1317,9 +1320,6 @@ func listen(l net.Listener, err error) {
 			loadApps(specs, defaultRouter)
 			getPolicies()
 		}
-
-		defaultRouter.SkipClean(true)
-		mainRouter.SkipClean(true)
 
 		// Use a custom server so we can control keepalives
 		if config.HttpServerOptions.OverrideDefaults {
